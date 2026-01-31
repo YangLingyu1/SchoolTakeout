@@ -1,0 +1,66 @@
+<view class="product-detail-container">
+  <!-- 商品图片 -->
+  <view class="product-images">
+    <swiper class="image-swiper" indicator-dots="true" autoplay="false">
+      <swiper-item>
+        <image class="product-image" src="{{product.imageUrl}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 商品信息 -->
+  <view class="product-info">
+    <view class="product-header">
+      <text class="product-name">{{product.name}}</text>
+      <view class="product-price-section">
+        <text class="product-price">¥{{product.price}}</text>
+        <text class="product-stock">库存: {{product.stock}}</text>
+      </view>
+    </view>
+    
+    <view class="product-description">
+      <text class="desc-label">商品描述</text>
+      <text class="desc-content">{{product.description}}</text>
+    </view>
+  </view>
+
+  <!-- 购买操作 -->
+  <view class="purchase-section">
+    <view class="quantity-selector">
+      <text class="quantity-label">数量</text>
+      <view class="quantity-control">
+        <text class="quantity-btn minus {{quantity <= 1 ? 'disabled' : ''}}" bindtap="decreaseQuantity">-</text>
+        <text class="quantity-text">{{quantity}}</text>
+        <text class="quantity-btn plus {{quantity >= product.stock ? 'disabled' : ''}}" bindtap="increaseQuantity">+</text>
+      </view>
+    </view>
+    
+    <view class="action-buttons">
+      <button class="btn-secondary add-cart-btn" bindtap="addToCart">
+        <text>加入购物车</text>
+      </button>
+      <button class="btn-primary buy-now-btn" bindtap="buyNow">
+        <text>立即购买</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 推荐区域 -->
+  <view class="recommend-section" wx:if="{{purchasedProducts.length > 0}}">
+    <view class="recommend-header">
+      <text class="recommend-title">购买过该商品的用户还买了</text>
+    </view>
+    <scroll-view class="recommend-list" scroll-x>
+      <view class="recommend-item" wx:for="{{purchasedProducts}}" wx:key="id" bindtap="goToProduct" data-id="{{item.id}}">
+        <image class="recommend-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <text class="recommend-name">{{item.name}}</text>
+        <text class="recommend-price">¥{{item.price}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 随机提示 -->
+  <view class="tips-section">
+    <text class="tips-text">{{randomTip}}</text>
+  </view>
+</view>

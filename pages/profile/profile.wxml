@@ -1,0 +1,61 @@
+<view class="profile-container">
+  <!-- 用户信息 -->
+  <view class="user-section">
+    <view class="user-info">
+      <image class="user-avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill" bindtap="changeAvatar"></image>
+      <view class="user-details">
+        <text class="user-name">{{userInfo.nickname || '微信用户'}}</text>
+        <text class="user-phone">{{userInfo.phone || ''}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-section">
+    <view class="menu-group">
+      <view class="menu-item" bindtap="goToAddress">
+        <text class="menu-text">收货地址</text>
+        <image class="menu-arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <view class="menu-group">
+      <view class="menu-item" bindtap="showServiceTerms">
+        <text class="menu-text">服务条款</text>
+        <image class="menu-arrow" src="/images/arrow-right.png"></image>
+      </view>
+      <view class="menu-item" bindtap="showPrivacyPolicy">
+        <text class="menu-text">隐私政策</text>
+        <image class="menu-arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <view class="menu-group">
+      <view class="menu-item" bindtap="contactCustomerService">
+        <text class="menu-text">联系客服</text>
+        <text class="menu-value">1234567890</text>
+        <image class="menu-arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <view class="menu-group" wx:if="{{!isRider}}">
+      <view class="menu-item" bindtap="goToRiderPage">
+        <text class="menu-text">进入骑手页面</text>
+        <image class="menu-arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <view class="menu-group" wx:if="{{isRider}}">
+      <view class="menu-item" bindtap="goToRiderCenter">
+        <text class="menu-text">骑手中心</text>
+        <text class="menu-value">{{riderStatusText}}</text>
+        <image class="menu-arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section">
+    <button class="logout-btn" bindtap="logout">退出登录</button>
+  </view>
+</view>

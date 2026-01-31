@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: admin-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/takeout?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+# JWT配置（和JwtUtil类的@Value完全匹配）
+jwt:
+  secret: 8e9f2a7d3c5b1e8a9d7b3c5f8e9a7d2b8e9f2a7d3c5b1e8a9d7b3c5f8e9a7d2b8e9f2a7d3c5b1e8a9d7b3c5f8e9a7d2b8e9f2a7d3c5b1e8a9d7b3c5f8e9a7d2b8e9f2a7d3c5b1e8a9d7b3c5f8e9a7d2b
+  expiration: 86400000 # 24小时，单位毫秒（Long类型，和类中Long expiration匹配）
+server:
+  port: 8081
+upload:
+  path: ../uploads

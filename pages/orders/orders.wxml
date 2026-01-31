@@ -1,0 +1,131 @@
+<view class="orders-container">
+  <!-- 订单状态筛选 -->
+  <view class="order-tabs">
+    <view class="tab-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">
+      <text class="tab-text">全部</text>
+    </view>
+    <view class="tab-item {{currentTab === 'pending' ? 'active' : ''}}" bindtap="switchTab" data-tab="pending">
+      <text class="tab-text">待接单</text>
+    </view>
+    <view class="tab-item {{currentTab === 'delivering' ? 'active' : ''}}" bindtap="switchTab" data-tab="delivering">
+      <text class="tab-text">配送中</text>
+    </view>
+    <view class="tab-item {{currentTab === 'completed' ? 'active' : ''}}" bindtap="switchTab" data-tab="completed">
+      <text class="tab-text">已完成</text>
+    </view>
+  </view>
+
+  <!-- 订单列表 -->
+  <scroll-view class="orders-list" scroll-y refresher-enabled="{{true}}" refresher-triggered="{{isRefreshing}}" bindrefresherrefresh="onRefresh">
+    <view class="order-item" wx:for="{{orders}}" wx:key="id">
+      <view class="order-header">
+        <text class="order-number">订单号：{{item.orderNo || item.orderNumber}}</text>
+        <view class="order-header-right">
+          <text class="order-status">{{getStatusText(item.status)}}</text>
+          <text class="delete-order" bindtap="deleteOrder" data-id="{{item.id}}">删除</text>
+        </view>
+      </view>
+      
+      <view class="order-progress">
+        <view class="progress-steps">
+          <view class="step {{item.status >= 1 ? 'active' : ''}}">
+            <view class="step-icon"></view>
+            <text class="step-text">待接单</text>
+          </view>
+          <view class="step-line {{item.status >= 2 ? 'active' : ''}}"></view>
+          <view class="step {{item.status >= 2 ? 'active' : ''}}">
+            <view class="step-icon"></view>
+            <text class="step-text">配送中</text>
+          </view>
+          <view class="step-line {{item.status >= 3 ? 'active' : ''}}"></view>
+          <view class="step {{item.status >= 3 ? 'active' : ''}}">
+            <view class="step-icon"></view>
+            <text class="step-text">已完成</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-items">
+        <view class="item" wx:for="{{item.items || []}}" wx:key="productId" wx:for-item="product">
+          <image class="item-image" src="{{product.image || 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=food product placeholder, simple design&image_size=square'}}" mode="aspectFill"></image>
+          <view class="item-info">
+            <text class="item-name">{{product.name}}</text>
+            <text class="item-quantity">x{{product.quantity}}</text>
+          </view>
+          <text class="item-price">¥{{product.price * product.quantity}}</text>
+        </view>
+      </view>
+
+      <view class="order-summary">
+        <text class="summary-text">共{{item.items ? item.items.length : 0}}件商品</text>
+        <text class="summary-price">¥{{item.totalAmount || 0}}</text>
+      </view>
+
+      <view class="order-address">
+        <text class="address-label">收货信息：</text>
+        <text class="address-name">{{item.addressName || '未知'}}</text>
+        <text class="address-phone">{{item.addressPhone || '未知'}}</text>
+        <text class="address-detail">{{item.addressBuilding || ''}}栋{{item.addressFloor || ''}}层 {{item.addressDetail || ''}}</text>
+      </view>
+
+      <view class="order-actions">
+        <button class="btn-secondary" wx:if="{{item.status === 0}}" bindtap="cancelOrder" data-id="{{item.id}}">
+          取消订单
+        </button>
+        <button class="btn-primary" wx:if="{{item.status === 0}}" bindtap="payOrder" data-id="{{item.id}}">
+          去支付
+        </button>
+        <button class="btn-primary" wx:if="{{item.status === 1}}" bindtap="contactRider" data-id="{{item.id}}">
+          联系骑手
+        </button>
+        <button class="btn-primary" wx:if="{{item.status === 2}}" bindtap="reorder" data-id="{{item.id}}">
+          再次购买
+        </button>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{orders.length === 0}}">
+      <image class="empty-image" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=empty order state, simple icon, gray color, minimal design&image_size=square"></image>
+      <text class="empty-text">暂无订单</text>
+      <text class="empty-subtext">快去下单吧～</text>
+    </view>
+  </scroll-view>
+
+  <!-- 订单详情弹窗 -->
+  <view class="order-detail-modal" wx:if="{{showOrderDetail}}" bindtap="closeOrderDetail">
+    <view class="modal-content" catchtap="">
+      <view class="modal-header">
+        <text class="modal-title">订单详情</text>
+        <text class="modal-close" bindtap="closeOrderDetail">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="detail-section">
+          <text class="section-title">订单信息</text>
+          <text class="detail-text">订单号：{{currentOrder ? (currentOrder.orderNo || currentOrder.orderNumber) : ''}}</text>
+          <text class="detail-text">下单时间：{{currentOrder ? currentOrder.createdAt : '2024-01-01 00:00:00'}}</text>
+          <text class="detail-text">订单状态：{{currentOrder ? getStatusText(currentOrder.status) : '未知'}}</text>
+        </view>
+        <view class="detail-section">
+          <text class="section-title">配送信息</text>
+          <text class="detail-text">收货人：{{currentOrder && currentOrder.address ? currentOrder.address.name : '未知'}}</text>
+          <text class="detail-text">联系电话：{{currentOrder && currentOrder.address ? currentOrder.address.phone : '未知'}}</text>
+          <text class="detail-text">配送地址：{{currentOrder && currentOrder.address ? (currentOrder.address.building + '栋' + currentOrder.address.floor + '层 ' + currentOrder.address.detail) : '默认地址'}}</text>
+        </view>
+        <view class="detail-section">
+          <text class="section-title">商品信息</text>
+          <view class="detail-item" wx:for="{{currentOrder && currentOrder.items ? currentOrder.items : []}}" wx:key="productId">
+            <text class="item-name">{{item.name}}</text>
+            <text class="item-quantity">x{{item.quantity}}</text>
+            <text class="item-price">¥{{item.price * item.quantity}}</text>
+          </view>
+        </view>
+        <view class="detail-section">
+          <text class="section-title">费用明细</text>
+          <text class="detail-text">商品总额：¥{{currentOrder ? currentOrder.totalAmount : 0}}</text>
+          <text class="detail-text">配送费用：¥{{currentOrder ? currentOrder.deliveryFee : 0}}</text>
+          <text class="detail-text total">实付金额：¥{{currentOrder ? (currentOrder.totalAmount + currentOrder.deliveryFee) : 0}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

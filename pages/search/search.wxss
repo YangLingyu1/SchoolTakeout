@@ -1,0 +1,333 @@
+.search-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 搜索栏 */
+.search-section {
+  background-color: #FFFFFF;
+  padding: 24rpx 32rpx;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.search-bar .back-btn {
+  background: none !important;
+  border: none !important;
+  color: #333333 !important;
+  font-size: 28rpx !important;
+  padding: 0 16rpx !important;
+  margin: 0 !important;
+  min-width: 100rpx !important;
+  max-width: 100rpx !important;
+  height: 50rpx !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.search-bar .back-btn .back-text {
+  font-size: 28rpx !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #333333 !important;
+}
+
+.search-input {
+  flex: 1;
+  background-color: #f5f5f5;
+  border-radius: 50rpx;
+  padding: 20rpx 32rpx;
+  font-size: 28rpx;
+  border: none;
+  color: #333333;
+}
+
+.search-btn {
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50rpx;
+  padding: 14rpx 10rpx !important;
+  font-size: 24rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  width: 110rpx !important;
+  min-width: 110rpx !important;
+  line-height: 1.2;
+}
+
+/* 搜索结果 */
+.search-results {
+  background-color: #FFFFFF;
+  padding: 24rpx;
+}
+
+.result-item {
+  display: flex;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 24rpx;
+}
+
+.result-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.result-name {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+}
+
+.result-desc {
+  font-size: 24rpx;
+  color: #666666;
+  margin-bottom: 16rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.result-price {
+  font-size: 32rpx;
+  color: #FF6B35;
+  font-weight: bold;
+}
+
+/* 搜索历史 */
+.search-history {
+  background-color: #FFFFFF;
+  padding: 24rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.history-title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.clear-history {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.history-tag {
+  background-color: #f5f5f5;
+  color: #666666;
+  padding: 12rpx 24rpx;
+  border-radius: 50rpx;
+  font-size: 24rpx;
+}
+
+/* 热门搜索 */
+.hot-search {
+  background-color: #FFFFFF;
+  padding: 24rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.hot-header {
+  margin-bottom: 24rpx;
+}
+
+.hot-title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.hot-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.hot-tag {
+  background-color: #FFF3E0;
+  color: #FF6B35;
+  padding: 12rpx 24rpx;
+  border-radius: 50rpx;
+  font-size: 24rpx;
+  border: 2rpx solid #FFE0B2;
+}
+
+/* 新品上市 */
+.new-products {
+  background-color: #FFFFFF;
+  padding: 24rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.new-header {
+  margin-bottom: 24rpx;
+}
+
+.new-title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.new-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+
+.new-item {
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  text-align: center;
+  position: relative;
+}
+
+.new-image {
+  width: 100%;
+  height: 160rpx;
+  border-radius: 8rpx;
+  margin-bottom: 12rpx;
+}
+
+.new-name {
+  display: block;
+  font-size: 24rpx;
+  color: #333333;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.new-price {
+  display: block;
+  font-size: 28rpx;
+  color: #FF6B35;
+  font-weight: bold;
+}
+
+.new-badge {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  z-index: 10;
+}
+
+/* 推荐商品 */
+.recommend-section {
+  background-color: #FFFFFF;
+  padding: 24rpx 32rpx;
+}
+
+.recommend-header {
+  margin-bottom: 24rpx;
+}
+
+.recommend-title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.recommend-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
+
+.recommend-item {
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  text-align: center;
+}
+
+.recommend-image {
+  width: 100%;
+  height: 160rpx;
+  border-radius: 8rpx;
+  margin-bottom: 12rpx;
+}
+
+.recommend-name {
+  display: block;
+  font-size: 24rpx;
+  color: #333333;
+  margin-bottom: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recommend-price {
+  display: block;
+  font-size: 28rpx;
+  color: #FF6B35;
+  font-weight: bold;
+}
+
+/* 随机提示 */
+.tips-section {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(255, 142, 83, 0.08) 100%);
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  text-align: center;
+  margin: 24rpx 32rpx;
+  border: 2rpx solid rgba(255, 107, 53, 0.15);
+  animation: fadeIn 0.5s ease;
+}
+
+.tips-text {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+  font-weight: 500;
+}

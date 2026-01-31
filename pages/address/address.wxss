@@ -1,0 +1,254 @@
+.address-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 32rpx;
+  padding-bottom: 120rpx;
+}
+
+.page-header {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.address-item {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.address-content {
+  display: flex;
+  align-items: flex-start;
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+.address-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.address-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.recipient-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-right: 24rpx;
+}
+
+.recipient-phone {
+  font-size: 28rpx;
+  color: #666666;
+  margin-right: 16rpx;
+}
+
+.default-tag {
+  display: inline-block;
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+}
+
+.address-detail {
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.address-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-left: 32rpx;
+  flex-shrink: 0;
+  align-items: flex-end;
+}
+
+.address-actions .action-btn {
+  padding: 10rpx 20rpx !important;
+  font-size: 24rpx !important;
+  border-radius: 8rpx !important;
+  border: none !important;
+  background-color: #f5f5f5 !important;
+  color: #666666 !important;
+  line-height: 1.4 !important;
+  min-width: 80rpx !important;
+  max-width: 100rpx !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+.address-actions .edit-btn {
+  background-color: #e8f4ff !important;
+  color: #1890ff !important;
+}
+
+.address-actions .delete-btn {
+  background-color: #fff1f0 !important;
+  color: #ff4d4f !important;
+}
+
+.address-actions .default-btn {
+  background-color: #fff7e6 !important;
+  color: #fa8c16 !important;
+}
+
+.empty-address {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 80rpx 32rpx;
+  text-align: center;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 32rpx;
+  left: 32rpx;
+  right: 32rpx;
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50rpx;
+  padding: 30rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.3);
+  z-index: 100;
+}
+
+.address-form {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 32rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 12rpx;
+}
+
+.form-picker {
+  width: 100%;
+}
+
+.picker-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  padding: 24rpx;
+  transition: all 0.3s ease;
+}
+
+.picker-content:active {
+  background-color: #f0f0f0;
+  border-color: #FF6B35;
+}
+
+.picker-text {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.picker-arrow {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.form-input {
+  width: 100%;
+  padding: 24rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #FF6B35;
+  background-color: #FFFFFF;
+}
+
+.form-actions {
+  padding: 0 32rpx;
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.cancel-btn {
+  flex: 1;
+  background-color: #f5f5f5;
+  color: #666666;
+  border: none;
+  border-radius: 50rpx;
+  padding: 30rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.save-btn {
+  flex: 1;
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50rpx;
+  padding: 30rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.3);
+}
+
+.save-btn[disabled] {
+  background-color: #cccccc;
+  box-shadow: none;
+}
+
+.default-switch {
+  transform: scale(0.9);
+}
+
+.default-label {
+  font-size: 28rpx;
+  color: #666666;
+  margin-left: 16rpx;
+}

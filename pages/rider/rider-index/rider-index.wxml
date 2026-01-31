@@ -1,0 +1,30 @@
+<view class="rider-index-container">
+  <view class="welcome-section">
+    <image class="welcome-icon" src="/images/rider.png" mode="aspectFit"></image>
+    <text class="welcome-title">骑手工作台</text>
+    <text class="welcome-desc">欢迎使用骑手配送系统</text>
+  </view>
+
+  <view class="quick-actions">
+    <view class="action-card" bindtap="goToGrabOrders">
+      <image class="action-icon" src="/images/rider.png" mode="aspectFit"></image>
+      <text class="action-title">抢单大厅</text>
+      <text class="action-desc">查看待接订单</text>
+    </view>
+    <view class="action-card" bindtap="goToDelivery">
+      <image class="action-icon" src="/images/order3.png" mode="aspectFit"></image>
+      <text class="action-title">配送中</text>
+      <text class="action-desc">进行中的订单</text>
+    </view>
+    <view class="action-card" bindtap="goToStatistics">
+      <image class="action-icon" src="/images/search5.png" mode="aspectFit"></image>
+      <text class="action-title">数据统计</text>
+      <text class="action-desc">查看收益数据</text>
+    </view>
+    <view class="action-card" bindtap="goToProfile">
+      <image class="action-icon" src="/images/my1.png" mode="aspectFit"></image>
+      <text class="action-title">个人中心</text>
+      <text class="action-desc">管理骑手信息</text>
+    </view>
+  </view>
+</view>

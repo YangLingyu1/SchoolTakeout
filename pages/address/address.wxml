@@ -1,0 +1,83 @@
+<view class="address-container">
+  <view class="page-header">
+    <text class="page-title">地址管理</text>
+  </view>
+
+  <!-- 地址列表 -->
+  <view class="address-list" wx:if="{{!showAddForm && !showEditForm}}">
+    <view wx:for="{{addresses}}" wx:key="id" class="address-item">
+      <view class="address-content">
+        <view class="address-info">
+          <view class="address-header">
+            <text class="recipient-name">{{item.name}}</text>
+            <text class="recipient-phone">{{item.phone}}</text>
+            <text wx:if="{{item.isDefault}}" class="default-tag">默认</text>
+          </view>
+          <view class="address-detail">
+            <text>{{item.building}}号楼 {{item.floor}}层 {{item.detail}}</text>
+          </view>
+        </view>
+        <view class="address-actions">
+          <button class="action-btn edit-btn" bindtap="onEditAddress" data-id="{{item.id}}">编辑</button>
+          <button class="action-btn delete-btn" bindtap="onDeleteAddress" data-id="{{item.id}}">删除</button>
+          <button wx:if="{{!item.isDefault}}" class="action-btn default-btn" bindtap="onSetDefault" data-id="{{item.id}}">设为默认</button>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{addresses.length === 0}}" class="empty-address">
+      <text>暂无保存的地址</text>
+    </view>
+  </view>
+
+  <!-- 添加地址表单 -->
+  <view class="address-form" wx:if="{{showAddForm || showEditForm}}">
+    <view class="form-group">
+      <text class="form-label">楼栋</text>
+      <picker class="form-picker" bindchange="onBuildingChange" value="{{formData.buildingIndex}}" range="{{buildings}}">
+        <view class="picker-content">
+          <text class="picker-text">{{formData.buildingIndex >= 0 ? buildings[formData.buildingIndex] : '请选择楼栋'}}</text>
+          <image class="picker-arrow" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=simple arrow down icon, black, minimal design&image_size=square"></image>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">楼层</text>
+      <picker class="form-picker" bindchange="onFloorChange" value="{{formData.floorIndex}}" range="{{floors}}">
+        <view class="picker-content">
+          <text class="picker-text">{{formData.floorIndex >= 0 ? floors[formData.floorIndex] : '请选择楼层'}}</text>
+          <image class="picker-arrow" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=simple arrow down icon, black, minimal design&image_size=square"></image>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">详细地址</text>
+      <input class="form-input" placeholder="请输入详细地址（如：101号）" bindinput="onDetailAddressInput" value="{{formData.detailAddress}}" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">收件人姓名</text>
+      <input class="form-input" placeholder="请输入收件人姓名" bindinput="onRecipientNameInput" value="{{formData.recipientName}}" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">手机号码</text>
+      <input class="form-input" placeholder="请输入手机号码" bindinput="onPhoneInput" value="{{formData.phone}}" maxlength="11" />
+    </view>
+
+    <view class="form-group">
+      <switch class="default-switch" bindchange="onDefaultChange" checked="{{formData.isDefault}}" />
+      <text class="default-label">设为默认地址</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="form-actions" wx:if="{{showAddForm || showEditForm}}">
+    <button class="btn-secondary cancel-btn" bindtap="onCancel">取消</button>
+    <button class="btn-primary save-btn" bindtap="saveAddress" disabled="{{!canSave}}">保存地址</button>
+  </view>
+
+  <!-- 添加新地址按钮 -->
+  <button wx:if="{{!showAddForm && !showEditForm}}" class="btn-primary add-btn" bindtap="onAddAddress">+ 添加新地址</button>
+</view>

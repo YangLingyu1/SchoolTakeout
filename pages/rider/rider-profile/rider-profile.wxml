@@ -1,0 +1,109 @@
+<!--pages/rider/rider-profile/rider-profile.wxml-->
+<view class="profile-container">
+  <view class="custom-nav-bar">
+    <view class="nav-back" bindtap="goBack">
+      <view class="back-arrow"></view>
+    </view>
+    <view class="nav-title">骑手中心</view>
+  </view>
+  <view class="profile-content">
+    <view class="profile-header">
+      <view class="avatar-section">
+        <image class="avatar" src="{{userInfo.avatar || '/images/my.png'}}" mode="aspectFill"></image>
+        <text class="name">{{userInfo.nickname || '骑手'}}</text>
+        <text class="level-badge level-{{level}}">{{levelText}}</text>
+      </view>
+      <view class="status-section">
+        <text class="status-label">当前状态</text>
+        <view class="status-toggle">
+          <text class="status-btn {{riderStatus === 'active' ? 'active' : ''}}" bindtap="updateStatus" data-status="active">接单中</text>
+          <text class="status-btn {{riderStatus === 'inactive' ? 'active' : ''}}" bindtap="updateStatus" data-status="inactive">休息中</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="info-section">
+      <view class="info-item">
+        <text class="info-label">真实姓名</text>
+        <text class="info-value">{{riderInfo.realName}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">手机号</text>
+        <text class="info-value">{{riderInfo.phone}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">身份证号</text>
+        <text class="info-value">{{riderInfo.idCard}}</text>
+      </view>
+    </view>
+
+    <view class="balance-section">
+      <view class="balance-card">
+        <text class="balance-label">账户余额</text>
+        <text class="balance-value">¥{{riderInfo.balance}}</text>
+      </view>
+    </view>
+
+    <view class="payment-section">
+      <view class="payment-card" bindtap="uploadPaymentCode">
+        <text class="payment-label">收款码</text>
+        <image class="payment-code" src="{{riderInfo.paymentCode ? (riderInfo.paymentCode.indexOf('/') === 0 ? (app.globalData.baseUrl + riderInfo.paymentCode) : riderInfo.paymentCode) : '/images/upload.png'}}" mode="aspectFit"></image>
+        <text class="payment-tip">点击上传收款码</text>
+      </view>
+    </view>
+
+    <view class="menu-section">
+      <view class="menu-item" bindtap="goToWithdraw">
+        <text class="menu-text">提现</text>
+        <text class="menu-arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="goToOrders">
+        <text class="menu-text">我的订单</text>
+        <text class="menu-arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="goToEarnings">
+        <text class="menu-text">收益明细</text>
+        <text class="menu-arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="goToSettings">
+        <text class="menu-text">设置</text>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+
+    <view class="info-links">
+      <view class="link-item" bindtap="showServiceTerms">
+        <text class="link-text">服务条款</text>
+      </view>
+      <view class="link-item" bindtap="showPrivacyPolicy">
+        <text class="link-text">隐私政策</text>
+      </view>
+      <view class="link-item" bindtap="contactService">
+        <text class="link-text">客服：1234567890</text>
+      </view>
+    </view>
+
+    <view class="logout-section">
+      <button class="logout-btn" bindtap="logout">退出骑手模式</button>
+    </view>
+  </view>
+
+  <view class="rider-tab-bar">
+      <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+        <image class="tab-icon" src="/images/index.png" mode="aspectFit"></image>
+        <text class="tab-text">抢单</text>
+      </view>
+      <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+        <image class="tab-icon" src="/images/order.png" mode="aspectFit"></image>
+        <text class="tab-text">配送</text>
+      </view>
+      <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">
+        <image class="tab-icon" src="/images/search.png" mode="aspectFit"></image>
+        <text class="tab-text">统计</text>
+      </view>
+      <view class="tab-item {{currentTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">
+        <image class="tab-icon" src="/images/my.png" mode="aspectFit"></image>
+        <text class="tab-text">我的</text>
+      </view>
+    </view>
+</view>

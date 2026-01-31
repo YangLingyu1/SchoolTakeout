@@ -1,0 +1,55 @@
+<!--pages/service-terms/service-terms.wxml-->
+<view class="terms-container">
+  <view class="back-btn" bindtap="goBack">
+    <image class="back-icon" src="/images/arrow-left.png" mode="aspectFit"></image>
+  </view>
+  <view class="terms-content">
+    <view class="terms-title">
+      <text>服务条款</text>
+    </view>
+    <view class="terms-body">
+      <view class="terms-section">
+        <text class="section-title">一、服务说明</text>
+        <text class="section-text">1.1 本平台为校园配送服务平台，为用户提供便捷的校园配送服务。</text>
+        <text class="section-text">1.2 骑手需按照平台规则完成配送任务，确保服务质量。</text>
+        <text class="section-text">1.3 平台有权根据业务需要调整服务内容和规则。</text>
+      </view>
+
+      <view class="terms-section">
+        <text class="section-title">二、骑手责任</text>
+        <text class="section-text">2.1 骑手需按时完成配送任务，不得无故拒单或延误。</text>
+        <text class="section-text">2.2 骑手需保证配送质量，确保商品完好无损。</text>
+        <text class="section-text">2.3 骑手需遵守平台规定，不得进行违规操作。</text>
+        <text class="section-text">2.4 骑手需保持良好的服务态度，礼貌对待用户。</text>
+      </view>
+
+      <view class="terms-section">
+        <text class="section-title">三、收益说明</text>
+        <text class="section-text">3.1 骑手收益按照"0.1元*楼层数 + 0.1元*商品数"计算。</text>
+        <text class="section-text">3.2 收益将在订单完成后自动结算到骑手账户。</text>
+        <text class="section-text">3.3 骑手可申请提现，提现规则详见平台公告。</text>
+      </view>
+
+      <view class="terms-section">
+        <text class="section-title">四、等级制度</text>
+        <text class="section-text">4.1 普通骑手：初始等级，最多可同时送1单。</text>
+        <text class="section-text">4.2 白银骑手：累计完成10单升级，最多可同时送3单。</text>
+        <text class="section-text">4.3 黄金骑手：累计完成50单升级，最多可同时送5单。</text>
+      </view>
+
+      <view class="terms-section">
+        <text class="section-title">五、违规处罚</text>
+        <text class="section-text">5.1 违规行为包括但不限于：拒单、延误、损坏商品、服务态度恶劣等。</text>
+        <text class="section-text">5.2 轻度违规将给予警告，严重违规将暂停或取消骑手资格。</text>
+        <text class="section-text">5.3 造成损失的，骑手需承担相应赔偿责任。</text>
+      </view>
+
+      <view class="terms-section">
+        <text class="section-title">六、其他条款</text>
+        <text class="section-text">6.1 本条款的解释权归平台所有。</text>
+        <text class="section-text">6.2 平台有权根据实际情况修改本条款，修改后将通过平台公告方式通知。</text>
+        <text class="section-text">6.3 使用本服务即表示您同意本服务条款。</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,114 @@
+<view class="index-container">
+  <!-- 搜索栏 -->
+  <view class="search-section">
+    <view class="search-bar">
+      <input class="search-input" placeholder="搜索美食..." bindinput="onSearchInput" value="{{searchKeyword}}" />
+      <button class="search-btn" bindtap="onSearch">搜索</button>
+    </view>
+    <view wx:if="{{currentCategory === null && searchKeyword}}" class="search-result-header">
+      <button class="back-btn" bindtap="resetSearch">返回搜索主页</button>
+      <text class="search-result-text">搜索结果: {{searchKeyword}}</text>
+    </view>
+  </view>
+
+  <!-- 营业状态提示 -->
+  <view class="business-status" wx:if="{{!isOpen}}">
+    <text class="status-text">{{deliveryNotice}}</text>
+  </view>
+
+  <!-- 夜间配送提示 -->
+  <view class="night-delivery-notice" wx:if="{{nightDelivery}}">
+    <text class="notice-text">{{deliveryNotice}}</text>
+  </view>
+
+  <!-- Banner轮播图 -->
+  <view class="banner-section">
+    <swiper class="banner-swiper" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <image class="banner-image" src="{{item.image}}" mode="aspectFill" bindtap="onBannerTap" data-id="{{item.id}}" data-product-id="{{item.productId}}"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 分类和商品 -->
+  <view class="content-section">
+    <view class="category-sidebar">
+      <view class="category-item {{currentCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{categories}}" 
+            wx:key="id"
+            bindtap="switchCategory"
+            data-id="{{item.id}}">
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+
+    <view class="product-list">
+      <view class="product-item" wx:for="{{products}}" wx:key="id">
+        <image class="product-image" src="{{item.imageUrl}}" mode="aspectFill" bindtap="goToProductDetail" data-id="{{item.id}}"></image>
+        <view class="product-info">
+          <text class="product-name" bindtap="goToProductDetail" data-id="{{item.id}}">{{item.name}}</text>
+          <text class="product-desc" bindtap="goToProductDetail" data-id="{{item.id}}">{{item.description}}</text>
+          <view class="product-footer">
+            <text class="product-price" bindtap="goToProductDetail" data-id="{{item.id}}">¥{{item.price}}</text>
+            <view class="product-actions">
+              <view class="quantity-control" catchtap="stopPropagation">
+                <text wx:if="{{productQuantityMap[item.id] > 0}}" class="quantity-btn minus" catchtap="decreaseQuantity" data-id="{{item.id}}">-</text>
+                <text wx:if="{{productQuantityMap[item.id] > 0}}" class="quantity-text">{{productQuantityMap[item.id]}}</text>
+                <text class="quantity-btn plus" catchtap="increaseQuantity" data-id="{{item.id}}">+</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 购物车悬浮窗 -->
+  <view class="cart-float" wx:if="{{cart.length > 0}}" bindtap="toggleCart">
+    <view class="cart-icon" catchtap="stopPropagation">
+      <image src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=simple shopping cart icon, orange color, minimal design&image_size=square"></image>
+      <view class="cart-badge">{{totalQuantity}}</view>
+    </view>
+    <view class="cart-info" catchtap="stopPropagation">
+      <text class="cart-total">¥{{cartTotal}}</text>
+      <text class="cart-fee">{{deliveryFee > 0 ? '配送费¥' + deliveryFee : '免配送费'}}</text>
+    </view>
+    <button class="cart-checkout" catchtap="goToCheckout">去结算</button>
+  </view>
+
+  <!-- 购物车详情弹窗 -->
+  <view class="cart-modal" wx:if="{{showCart}}" bindtap="toggleCart">
+    <view class="cart-content" catchtap="stopPropagation">
+      <view class="cart-header">
+        <text class="cart-title">购物车</text>
+        <text class="cart-clear" bindtap="clearCart">清空</text>
+      </view>
+      <scroll-view class="cart-list" scroll-y>
+        <view class="cart-item" wx:for="{{cart}}" wx:key="id">
+          <text class="cart-item-name">{{item.name}}</text>
+          <view class="cart-item-control" catchtap="stopPropagation">
+            <text class="quantity-btn minus" catchtap="decreaseQuantity" data-id="{{item.id}}">-</text>
+            <text class="quantity-text">{{item.quantity}}</text>
+            <text class="quantity-btn plus" catchtap="increaseQuantity" data-id="{{item.id}}">+</text>
+          </view>
+          <text class="cart-item-price">¥{{item.totalPrice}}</text>
+        </view>
+      </scroll-view>
+      <view class="cart-summary">
+        <view class="summary-item">
+          <text>商品总计</text>
+          <text>¥{{cartTotal}}</text>
+        </view>
+        <view class="summary-item">
+          <text>配送费</text>
+          <text>¥{{deliveryFee}}</text>
+        </view>
+        <view class="summary-total">
+          <text>总计</text>
+          <text class="total-price">¥{{finalTotal}}</text>
+        </view>
+        <button class="checkout-btn" bindtap="goToCheckout">立即支付</button>
+      </view>
+    </view>
+  </view>
+</view>

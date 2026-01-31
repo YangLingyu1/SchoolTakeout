@@ -1,0 +1,110 @@
+<!--pages/rider/statistics/statistics.wxml-->
+<view class="statistics-container">
+  <view class="custom-nav-bar">
+    <view class="nav-back" bindtap="goBack">
+      <view class="back-arrow"></view>
+    </view>
+    <view class="nav-title">数据统计</view>
+  </view>
+  <view class="statistics-content">
+    <view class="section-title">
+      <text>个人仪表盘</text>
+    </view>
+
+    <view class="level-section">
+      <view class="level-card">
+        <text class="level-label">骑手等级</text>
+        <text class="level-value {{levelClass}}">{{levelText}}</text>
+        <text class="level-desc">{{levelDesc}}</text>
+      </view>
+    </view>
+
+    <view class="stats-overview">
+      <view class="stat-card">
+        <text class="stat-label">今日收益</text>
+        <text class="stat-value">¥{{todayEarnings}}</text>
+        <text class="stat-rank">排名：第{{rankByTodayEarnings}}名</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">本月收益</text>
+        <text class="stat-value">¥{{monthEarnings}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">总收益</text>
+        <text class="stat-value">¥{{totalEarnings}}</text>
+        <text class="stat-rank">排名：第{{rankByTotalEarnings}}名</text>
+      </view>
+    </view>
+
+    <view class="stats-overview">
+      <view class="stat-card">
+        <text class="stat-label">今日订单</text>
+        <text class="stat-value">{{todayOrders}}</text>
+        <text class="stat-rank">排名：第{{rankByTodayOrders}}名</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">本月订单</text>
+        <text class="stat-value">{{monthOrders}}</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-label">总订单数</text>
+        <text class="stat-value">{{totalOrders}}</text>
+        <text class="stat-rank">排名：第{{rankByTotalOrders}}名</text>
+      </view>
+    </view>
+
+    <view class="progress-section">
+      <view class="progress-item">
+        <text class="progress-label">升级白银（10单）</text>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{silverProgress}}%"></view>
+        </view>
+        <text class="progress-text">{{totalOrders}}/10</text>
+      </view>
+      <view class="progress-item">
+        <text class="progress-label">升级黄金（50单）</text>
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{goldProgress}}%"></view>
+        </view>
+        <text class="progress-text">{{totalOrders}}/50</text>
+      </view>
+    </view>
+
+    <view class="section-title">
+      <text>收益明细</text>
+    </view>
+
+    <view class="earnings-list" wx:if="{{earnings.length > 0}}">
+      <view class="earning-item" wx:for="{{earnings}}" wx:key="id">
+        <view class="earning-info">
+          <text class="earning-type">{{item.type === 'delivery_fee' ? '配送费' : '其他'}}</text>
+          <text class="earning-time">{{item.createdAt}}</text>
+        </view>
+        <text class="earning-amount">+¥{{item.amount}}</text>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:else>
+      <text class="empty-text">暂无收益记录</text>
+    </view>
+  </view>
+
+  <view class="rider-tab-bar">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">
+      <image class="tab-icon" src="/images/index.png" mode="aspectFit"></image>
+      <text class="tab-text">抢单</text>
+    </view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">
+      <image class="tab-icon" src="/images/order.png" mode="aspectFit"></image>
+      <text class="tab-text">配送</text>
+    </view>
+    <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">
+      <image class="tab-icon" src="/images/search.png" mode="aspectFit"></image>
+      <text class="tab-text">统计</text>
+    </view>
+    <view class="tab-item {{currentTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">
+      <image class="tab-icon" src="/images/my.png" mode="aspectFit"></image>
+      <text class="tab-text">我的</text>
+    </view>
+  </view>
+</view>
